@@ -31,7 +31,7 @@ SECRET_KEY = "django-insecure-_wz^g$ope($-8-hru@geg1&^_=61z9hgzn#(oox%9h6a&5@sf7
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.azurewebsites.net',
+    'restaurantlyy.azurewebsites.net',
     '*',
 ]
 
