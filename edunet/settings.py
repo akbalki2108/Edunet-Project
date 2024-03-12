@@ -32,7 +32,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'restaurantlyy.azurewebsites.net',
-    'https://restaurantlyy.azurewebsites.net',
+    'https://restaurantlyy.azurewebsites.net/',
+    'http://restaurantlyy.azurewebsites.net/',
     '*',
 ]
 
