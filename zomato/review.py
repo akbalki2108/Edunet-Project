@@ -1,8 +1,9 @@
 import openai
 import pandas as pd
 
+
 def generate_summary_with_index(index):
-    openai.api_key = "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"
+    openai.api_key = "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"
 
     # Step 3: Preprocess your text data
     def split_text(text):
