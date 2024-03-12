@@ -1,0 +1,3 @@
+pip insatll django-import-export
+pip install folium
+pip install openai=0.0.28
