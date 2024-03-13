@@ -4,7 +4,7 @@ from edunet.settings import *
 from .settings import BASE_DIR
 
 # Define allowed hosts and other settings specific to deployment
-ALLOWED_HOSTS = ['restaurantlyy.azurewebsites.net']
+ALLOWED_HOSTS = ['restaurantlyy.azurewebsites.net','*']
 CSRF_TRUSTED_ORIGINS = ['https://' + 'restaurantlyy.azurewebsites.net']
 
 DEBUG = False
