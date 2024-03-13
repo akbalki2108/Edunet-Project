@@ -57,93 +57,92 @@ def dashboard(request):
     top_listed_in_type = train_data['listed_in_type'].value_counts()
 
 
-    form = SearchForm(request.POST or None)
-    result = train_data.copy()
+    # form = SearchForm(request.POST or None)
+    # result = train_data.copy()
 
-    if request.method == 'POST' and form.is_valid():
-        search_query = form.cleaned_data['search_query']
-        rate = int(form.cleaned_data['rate'])
-        online_order = int(form.cleaned_data.get('online_order'))
-        book_table = int(form.cleaned_data.get('book_table'))
-        listed_in_type = form.cleaned_data['listed_in_type']
-
-
-        if search_query:
-            result = result[result['location'] == search_query]
-
-        if rate:
-            result = result[(result['rate'] <= rate) & (result['rate'] > rate - 1)]
-
-        if online_order == 1:
-            result = result[result['online_order'] == 'Yes']
-        elif online_order == 2:
-            result = result[result['online_order'] == 'No']
-
-        if book_table == 1:
-            result = result[result['book_table'] == 'Yes']
-        elif book_table == 2:
-            result = result[result['book_table'] == 'No']
+    # if request.method == 'POST' and form.is_valid():
+    #     search_query = form.cleaned_data['search_query']
+    #     rate = int(form.cleaned_data['rate'])
+    #     online_order = int(form.cleaned_data.get('online_order'))
+    #     book_table = int(form.cleaned_data.get('book_table'))
+    #     listed_in_type = form.cleaned_data['listed_in_type']
 
 
-        if listed_in_type == "Buffet":
-            result = result[result['listed_in_type'] == 'Buffet']
-        elif listed_in_type == "Delivery":
-            result = result[result['listed_in_type'] == 'Delivery']
-        elif listed_in_type == "Dine-out":
-            result = result[result['listed_in_type'] == 'Dine-out']
-        elif listed_in_type == "Desserts":
-            result = result[result['listed_in_type'] == 'Desserts']
-        elif listed_in_type == "Cafes":
-            result = result[result['listed_in_type'] == 'Cafes']
-        elif listed_in_type == "Drinks & nightlife":
-            result = result[result['listed_in_type'] == 'Drinks & nightlife']
-        elif listed_in_type == "Pubs and bars":
-            result = result[result['listed_in_type'] == 'Pubs and bars']
+    #     if search_query:
+    #         result = result[result['location'] == search_query]
+
+    #     if rate:
+    #         result = result[(result['rate'] <= rate) & (result['rate'] > rate - 1)]
+
+    #     if online_order == 1:
+    #         result = result[result['online_order'] == 'Yes']
+    #     elif online_order == 2:
+    #         result = result[result['online_order'] == 'No']
+
+    #     if book_table == 1:
+    #         result = result[result['book_table'] == 'Yes']
+    #     elif book_table == 2:
+    #         result = result[result['book_table'] == 'No']
+
+
+    #     if listed_in_type == "Buffet":
+    #         result = result[result['listed_in_type'] == 'Buffet']
+    #     elif listed_in_type == "Delivery":
+    #         result = result[result['listed_in_type'] == 'Delivery']
+    #     elif listed_in_type == "Dine-out":
+    #         result = result[result['listed_in_type'] == 'Dine-out']
+    #     elif listed_in_type == "Desserts":
+    #         result = result[result['listed_in_type'] == 'Desserts']
+    #     elif listed_in_type == "Cafes":
+    #         result = result[result['listed_in_type'] == 'Cafes']
+    #     elif listed_in_type == "Drinks & nightlife":
+    #         result = result[result['listed_in_type'] == 'Drinks & nightlife']
+    #     elif listed_in_type == "Pubs and bars":
+    #         result = result[result['listed_in_type'] == 'Pubs and bars']
         
-    col = train_data.columns.tolist()
-    result_dict = result.to_dict(orient='records') if result is not None else []
+    # col = train_data.columns.tolist()
+    # result_dict = result.to_dict(orient='records') if result is not None else []
 
-    train_data = result
+    # train_data = result
     
-    listed_in_type_distribution = train_data['listed_in_type'].value_counts()
+    # listed_in_type_distribution = train_data['listed_in_type'].value_counts()
 
-    fig4 = px.bar(listed_in_type_distribution,
-                x=listed_in_type_distribution.index, 
-                y=listed_in_type_distribution.values,
-                color=listed_in_type_distribution.index,
-                color_discrete_sequence= px.colors.qualitative.Set2,)
-    fig4.update_xaxes(title_text='Type')
-    fig4.update_yaxes(title_text='Data')
-    graph4 = fig4.to_html(full_html=False)
+    # fig4 = px.bar(listed_in_type_distribution,
+    #             x=listed_in_type_distribution.index, 
+    #             y=listed_in_type_distribution.values,
+    #             color=listed_in_type_distribution.index,
+    #             color_discrete_sequence= px.colors.qualitative.Set2,)
+    # fig4.update_xaxes(title_text='Type')
+    # fig4.update_yaxes(title_text='Data')
+    # graph4 = fig4.to_html(full_html=False)
 
-    fig3 = px.bar(top_Restaurant_type, 
-                x=top_Restaurant_type.index, 
-                y=top_Restaurant_type.values,
-                color=top_Restaurant_type.index,
+    # fig3 = px.bar(top_Restaurant_type, 
+    #             x=top_Restaurant_type.index, 
+    #             y=top_Restaurant_type.values,
+    #             color=top_Restaurant_type.index,
                 
-                color_discrete_sequence= px.colors.qualitative.Vivid,)
+    #             color_discrete_sequence= px.colors.qualitative.Vivid,)
     
-    graph3 = fig3.to_html(full_html=False)
+    # graph3 = fig3.to_html(full_html=False)
 
-    fig = px.scatter(train_data, x='cost2plates', y='rate', title='Scatter Plot of Cost vs. Rating')
-    graph = fig.to_html(full_html=False)
+    # fig = px.scatter(train_data, x='cost2plates', y='rate', title='Scatter Plot of Cost vs. Rating')
+    # graph = fig.to_html(full_html=False)
 
-    # fig2 = px.scatter(train_data, x='location', y='rate', title='Average Rating by Location')
+    # # fig2 = px.scatter(train_data, x='location', y='rate', title='Average Rating by Location')
+    # # graph2 = fig2.to_html(full_html=False)
+
+    # fig2 = px.bar(train_data, 
+    #           x='location', 
+    #           y='rate', 
+    #           title='Average Rating by Location', 
+    #           labels={'rate': 'Average Rating'},
+    #           color='location',
+    #           color_discrete_sequence= px.colors.qualitative.Dark24,
+    #           opacity=1,)
+    
+
+    # # Convert the plot to HTML
     # graph2 = fig2.to_html(full_html=False)
-
-    fig2 = px.bar(train_data, 
-              x='location', 
-              y='rate', 
-              title='Average Rating by Location', 
-              labels={'rate': 'Average Rating'},
-              color='location',
-              color_discrete_sequence= px.colors.qualitative.Dark24,
-              opacity=1,)
-    
-
-    # Convert the plot to HTML
-    graph2 = fig2.to_html(full_html=False)
-
     value={
         'tRestaurant' : tRestaurant,
         'average_rating': average_rating,
@@ -155,14 +154,27 @@ def dashboard(request):
         'top_Restaurant_type':top_Restaurant_type.index[0],
         'top_cuisines':top_cuisines.index[0],
         'top_listed_in_type':top_listed_in_type.index[0],
-        'graph':graph,
-        'graph2':graph2,
-        'graph3':graph3,
-        'graph4':graph4,
-        'result': result_dict, 
-        'columns': col, 
-        'form': form,
     }
+
+    # value={
+    #     'tRestaurant' : tRestaurant,
+    #     'average_rating': average_rating,
+    #     'most_voted_restaurant':most_voted_restaurant,
+    #     'average_cost_for_two':average_cost_for_two,
+    #     'topRestaurant':area_distribution.index[0],
+    #     'online_order_counts':online_order_counts["Yes"],
+    #     'table_booking_counts':table_booking_counts["Yes"],
+    #     'top_Restaurant_type':top_Restaurant_type.index[0],
+    #     'top_cuisines':top_cuisines.index[0],
+    #     'top_listed_in_type':top_listed_in_type.index[0],
+    #     'graph':graph,
+    #     'graph2':graph2,
+    #     'graph3':graph3,
+    #     'graph4':graph4,
+    #     'result': result_dict, 
+    #     'columns': col, 
+    #     'form': form,
+    # }
     return  render(request,'dashboard.html',{'value':value})
 
 def load_data(request):
