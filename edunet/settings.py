@@ -28,7 +28,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = "django-insecure-_wz^g$ope($-8-hru@geg1&^_=61z9hgzn#(oox%9h6a&5@sf7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = [
 #     'restaurantlyy.azurewebsites.net',
@@ -51,8 +51,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -132,7 +132,14 @@ STATIC_URL = "static/"
 # STATICFILES_DIRS = [
 #     BASE_DIR / "static"
 # ]
-STATICFILES_STORAGE = 'whitenoise.storage.Compressedmanifeststaticfilesstorage'
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# STATICFILES_STORAGE = 'whitenoise.storage.Compressedmanifeststaticfilesstorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
