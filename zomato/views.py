@@ -39,7 +39,9 @@ def home(request):
 def about(request):
     return  render(request,'about.html')
 
-
+def dashboard(request):
+    return  render(request,'dashboard.html')
+'''
 def dashboard(request):
     train_data = pd.read_csv("zomato_cleaned.csv")
 
@@ -176,7 +178,7 @@ def dashboard(request):
     #     'form': form,
     # }
     return  render(request,'dashboard.html',{'value':value})
-
+'''
 def testing(request):
     return render(request,'testing.html')
 
