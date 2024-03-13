@@ -1,12 +1,13 @@
 import os
 from edunet.settings import *
+# Import settings from settings.py
 from .settings import BASE_DIR
 
-ALLOWED_HOSTS = [os.environ['restaurantlyy.azurewebsites.net']]
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['restaurantlyy.azurewebsites.net']]
+# Define allowed hosts and other settings specific to deployment
+ALLOWED_HOSTS = ['restaurantlyy.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://' + 'restaurantlyy.azurewebsites.net']
 
 DEBUG = False
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -19,13 +20,14 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+# Set STATIC_ROOT to the directory where static files will be collected during deployment
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Define the database settings for deployment
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
