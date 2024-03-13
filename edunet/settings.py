@@ -81,17 +81,34 @@ WSGI_APPLICATION = "edunet.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#         'OPTIONS': {
+#             'timeout': 60, 
+#             'check_same_thread': False, 
+#             'uri': True,
+#         },
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "restaurantlyy-database",
+        "USER": "admin_restaurantlyy",
+        "PASSWORD": "restaurantlyy@123",
+        "HOST": "restaurantlyy-database-server.postgres.database.azure.com",
+        "PORT": "5432",
         'OPTIONS': {
-            'timeout': 60, 
-            'check_same_thread': False, 
-            'uri': True,
+            'sslmode':'require'
         },
     }
 }
+
+# admin_restaurantlyy
+# set DB_PASSWORD = restaurantlyy@123
 
 
 # Password validation
