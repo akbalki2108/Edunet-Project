@@ -11,4 +11,6 @@ urlpatterns = [
     path('heatmap', views.heatmap, name="heatmap"),
     path('Zomato', views.Zomato, name="Zomato"),
     path('get_info/<int:ind>/', views.get_info, name='get_info'),
+    path('testing/', views.testing, name='testing'),
+
 ]

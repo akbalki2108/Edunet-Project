@@ -177,6 +177,9 @@ def dashboard(request):
     # }
     return  render(request,'dashboard.html',{'value':value})
 
+def testing(request):
+    return render(request,'testing.html')
+
 def load_data(request):
     df = pd.read_csv("zomato_cleaned.csv")
     # print(df.head())
