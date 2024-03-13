@@ -40,9 +40,11 @@ def about(request):
     return  render(request,'about.html')
 
 def dashboard(request):
-    df = pd.read_csv('testingdata.csv')
-    
-    return  render(request,'dashboard.html')
+    df = pd.read_csv('testingdata.csv',nrows=1)
+    first_row_dict = df.iloc[0].to_dict()
+
+
+    return  render(request,'dashboard.html',{'first_row': first_row_dict})
 '''
 def dashboard(request):
     train_data = pd.read_csv("zomato_cleaned.csv")

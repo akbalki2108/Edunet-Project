@@ -221,6 +221,19 @@
     <div class="container" style="margin-block: 50px;">
         <div class="card">
             <div class="card-content">
+                <h1>First Row of CSV</h1>
+                <table>
+                    <tr>
+                        <th>Column Name</th>
+                        <th>Value</th>
+                    </tr>
+                    {% for key, value in first_row.items %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
                 <h4>Total Restaurants</h4>
                 <img src="{% static 'restaurant.png' %}" alt="" width="70px">
                 <p style="color: #ffffff;">{{ value.tRestaurant }}</p>
