@@ -178,7 +178,11 @@ def dashboard(request):
     return  render(request,'dashboard.html',{'value':value})
 
 def testing(request):
-    return render(request,'testing.html')
+    train_data = pd.DataFrame(list(Restaurant.objects.all().values()))
+    value={
+        'train_data':train_data,
+    }
+    return render(request,'testing.html',{'value':value})
 
 def load_data(request):
     df = pd.read_csv("zomato_cleaned.csv")
