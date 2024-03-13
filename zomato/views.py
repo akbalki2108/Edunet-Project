@@ -39,15 +39,9 @@ def home(request):
 def about(request):
     return  render(request,'about.html')
 
-def dashboard(request):
-    df = pd.read_csv('testingdata.csv',nrows=1)
-    first_row_dict = df.iloc[0].to_dict()
 
-
-    return  render(request,'dashboard.html',{'first_row': first_row_dict})
-'''
 def dashboard(request):
-    train_data = pd.read_csv("zomato_cleaned.csv")
+    train_data = pd.DataFrame(list(Restaurant.objects.all().values()))
 
     tRestaurant = train_data.shape[0]
     average_rating = train_data['rate'].mean()
@@ -56,7 +50,7 @@ def dashboard(request):
     average_cost_for_two = train_data['cost2plates'].mean()
     average_cost_for_two = round(average_cost_for_two, 2)
     area_distribution = train_data['area'].value_counts()
-    online_order_counts = train_data['online_order'].value_counts()
+    online_order_counts = (train_data['online_order'] == True).sum()
     table_booking_counts = train_data['book_table'].value_counts()
     top_Restaurant_type = train_data['rest_type'].value_counts()
     top_cuisines = train_data['cuisines'].value_counts()
@@ -155,8 +149,8 @@ def dashboard(request):
         'most_voted_restaurant':most_voted_restaurant,
         'average_cost_for_two':average_cost_for_two,
         'topRestaurant':area_distribution.index[0],
-        'online_order_counts':online_order_counts["Yes"],
-        'table_booking_counts':table_booking_counts["Yes"],
+        'online_order_counts':online_order_counts,
+        #'table_booking_counts':table_booking_counts["Yes"],
         'top_Restaurant_type':top_Restaurant_type.index[0],
         'top_cuisines':top_cuisines.index[0],
         'top_listed_in_type':top_listed_in_type.index[0],
@@ -182,7 +176,7 @@ def dashboard(request):
     #     'form': form,
     # }
     return  render(request,'dashboard.html',{'value':value})
-'''
+
 def testing(request):
     return render(request,'testing.html')
 

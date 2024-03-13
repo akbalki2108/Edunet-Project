@@ -1,9 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Zomato
+from .models import *
 
-# Register your models here.
-class ZomatoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-    ...
-    
-admin.site.register(Zomato,ZomatoAdmin)
+
+admin.site.register(Restaurant)
