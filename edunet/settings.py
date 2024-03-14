@@ -96,13 +96,13 @@ WSGI_APPLICATION = "edunet.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "restaurantlyy-database",
-        "USER": "admin_restaurantlyy",
-        "PASSWORD": "restaurantlyy@123",
-        "HOST": "restaurantlyy-database-server.postgres.database.azure.com",
-        "PORT": "5432",
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
         'OPTIONS': {
-            'sslmode':'require'
+            'sslmode': os.getenv('DB_SSL_MODE', 'require'),  # Use 'require' if not specified
         },
     }
 }
@@ -111,6 +111,8 @@ DATABASES = {
 # set DB_PASSWORD = restaurantlyy@123
 
 
+# eegxxbriuk
+# 25V6BALCKCC315GJ$
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

@@ -277,7 +277,38 @@ def get_info(request, ind):
 
 
 def filter_data(request):
-    df = pd.read_csv("zomato_cleaned.csv")
+    df1 = Restaurant.objects.all()[:10]
+    data = []  # List to store dictionaries representing each entry
+
+    # Iterate over the queryset and create a dictionary for each entry
+    for entry in df1:
+        entry_dict = {
+            'url': entry.url,
+            'name': entry.name,
+            'online_order': entry.online_order,
+            'book_table': entry.book_table,
+            'rate': entry.rate,
+            'votes': entry.votes,
+            'location': entry.location,
+            'rest_type': entry.rest_type,
+            'cuisines': entry.cuisines,
+            'cost2plates': entry.cost2plates,
+            'listed_in_type': entry.listed_in_type,
+            'area': entry.area,
+            'ratings': entry.ratings,
+            'reviews': entry.reviews,
+            'count': entry.count,
+            'sentiments': entry.sentiments,
+            'summaries': entry.summaries,
+            'sentiment_label': entry.sentiment_label,
+            'index': entry.index_f,
+            'id': entry.id
+        }
+        data.append(entry_dict)
+
+    # Convert the list of dictionaries into a DataFrame
+    df = pd.DataFrame(data)
+    
 
     form = SearchForm(request.POST or None)
     result = df.copy()
