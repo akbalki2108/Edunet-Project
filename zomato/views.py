@@ -6,6 +6,7 @@ from .review import generate_summary_with_index
 import pandas as pd
 import numpy as np
 
+import psycopg2
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -178,11 +179,66 @@ def dashboard(request):
     return  render(request,'dashboard.html',{'value':value})
 
 def testing(request):
-    train_data = pd.DataFrame(list(Restaurant.objects.all().values()))
-    value={
-        'train_data':train_data,
-    }
-    return render(request,'testing.html',{'value':value})
+    # conn = psycopg2.connect(
+    #     dbname="restaurantlyy-database",
+    #     user="admin_restaurantlyy",
+    #     password="restaurantlyy@123",
+    #     host="restaurantlyy-database-server.postgres.database.azure.com",
+    #     port="5432"
+    # )
+
+    # # Fetch data from the database using a cursor
+    # cursor = conn.cursor()
+    # cursor.execute("SELECT * FROM zomato_restaurant LIMIT 10")  # Adjust query as needed
+
+    # # Fetch all rows from the result set
+    # rows = cursor.fetchall()
+
+    # # Close the cursor and connection
+    # cursor.close()
+    # conn.close()
+
+    # # Create a DataFrame from the fetched rows
+    # columns = ['url', 'name', 'online_order', 'book_table', 'rate', 'votes', 
+    #        'location', 'rest_type', 'cuisines', 'cost2plates', 'listed_in_type', 
+    #        'area', 'ratings', 'reviews', 'count', 'sentiments', 'summaries', 
+    #        'sentiment_label', 'index','id'] # Update with your column names
+    # train_data = pd.DataFrame(rows, columns=columns)
+    df = Restaurant.objects.all()[:10]
+    data = []  # List to store dictionaries representing each entry
+
+    # Iterate over the queryset and create a dictionary for each entry
+    for entry in df:
+        entry_dict = {
+            'url': entry.url,
+            'name': entry.name,
+            'online_order': entry.online_order,
+            'book_table': entry.book_table,
+            'rate': entry.rate,
+            'votes': entry.votes,
+            'location': entry.location,
+            'rest_type': entry.rest_type,
+            'cuisines': entry.cuisines,
+            'cost2plates': entry.cost2plates,
+            'listed_in_type': entry.listed_in_type,
+            'area': entry.area,
+            'ratings': entry.ratings,
+            'reviews': entry.reviews,
+            'count': entry.count,
+            'sentiments': entry.sentiments,
+            'summaries': entry.summaries,
+            'sentiment_label': entry.sentiment_label,
+            'index': entry.index_f,
+            'id': entry.id
+        }
+        data.append(entry_dict)
+
+    # Convert the list of dictionaries into a DataFrame
+    train_data = pd.DataFrame(data)
+    print(train_data)
+    value = {'train_data': train_data}
+    return render(request, 'testing.html', {'value':value})
+
 
 def load_data(request):
     df = pd.read_csv("zomato_cleaned.csv")

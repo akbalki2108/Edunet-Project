@@ -33,7 +33,7 @@
         </thead>
         <tbody>
             {% for index, row in value.train_data.iterrows %}
-            {% if forloop.counter0 < 10 %} <tr>
+            <tr>
                 <td>{{ row.url }}</td>
                 <td>{{ row.name }}</td>
                 <td>{{ row.online_order }}</td>
@@ -52,8 +52,7 @@
                 <td>{{ row.sentiments }}</td>
                 <td>{{ row.summaries }}</td>
                 <td>{{ row.sentiment_label }}</td>
-                </tr>
-            {% endif %}
+            </tr>
             {% endfor %}
         </tbody>
     </table>
